@@ -1,9 +1,11 @@
 var fs = require('fs');
-var path = process.argv[2];
-var countLines;
+var path = require('path');
+var filePath = process.argv[2];
+var extName = process.argv[3];
 
-fs.readFile(path,function cb(err, data){
-  if (err) console.error(err);
-  countLines = data.toString().split('\n').length - 1
-  console.log(countLines);
+fs.readdir(filePath, function cb(err, list){
+  if (err) throw err;
+  list.forEach(function(element){
+    if (path.extname(element) === '.' + extName) console.log(element);
+  });
 });
